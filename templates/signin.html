@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign-in</title>
+  </head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='signin.css')}}" />
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <a href="/">
+          <img
+            src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
+            alt="Expensis Logo"
+            height="120"
+          />
+        </a>
+        <span>EXPENSIS</span>
+      </div>
+    </header>
+    <main>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }} mt-2">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <div class="container">
+        <form action="/signin" method="POST">
+          <h2>Sign in</h2>
+          <label for="name"></label>
+          <input id="name" type="text" placeholder="Enter your name" />
+          <label for="email"></label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+          />
+          <label for="password"></label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder=" Password"
+          />
+          <button type="submit">Sign in</button>
+        </form>
+
+        <p>Or sign in with Google:</p>
+        <a href="{{ url_for('google.login') }}" class="google-btn">
+          <img
+            src="https://developers.google.com/identity/images/g-logo.png"
+            alt="Google logo"
+          />
+          <span>Sign in with Google</span>
+        </a>
+      </div>
+      <p>
+        Don't have an account ? <a href="{{url_for('signup') }}">Sign-up</a>
+      </p>
+    </main>
+  </body>
+</html>

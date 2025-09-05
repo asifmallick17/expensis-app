@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='contact.css')}}">
+</head>
+<body>
+
+  <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo">
+        <a href="/">
+          <img
+            src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
+            alt="Expensis Logo"
+            height="120"
+          />
+        </a>
+        <span>EXPENSIS</span>
+      </div>
+      
+      </header>
+
+  <section class="contact-section">
+    <div class="contact-container">
+      <h2>Contact Us</h2>
+      <p>Have a question or suggestion? Send us a message!</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, msg in messages %}
+            <p class="flash {{ category }}">{{ msg }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form action="/contact" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Write your message..." required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+</body>
+</html>

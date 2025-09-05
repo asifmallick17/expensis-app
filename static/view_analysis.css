@@ -1,0 +1,202 @@
+/* General body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0d1117, #141c27);
+    color: #e6f1ff;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Navbar/Header */
+.navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 12px 25px;
+    background: rgb(0, 0, 0);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid #64ffda;
+}
+
+/* Logo + Text */
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4facfe;
+}
+
+.logo img {
+    margin-right: 10px;
+    width: 150px;
+    height: auto;
+}
+
+/* Page title inside navbar */
+.navbar h1 {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin: 0;
+    color: #64ffda;
+    text-shadow: 0px 0px 8px rgba(100, 255, 218, 0.5);
+}
+
+/* Optional navigation links (if added later) */
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #fafafa;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar nav a:hover {
+    color: #4facfe;
+    text-decoration: underline;
+}
+
+/* Main container */
+.container {
+    width: 90%;
+    margin: 40px auto;
+    text-align: center;
+}
+
+/* Headings */
+h2 {
+    margin-bottom: 25px;
+    color: #5eead4;
+    font-size: 1.7em;
+    text-shadow: 0px 0px 10px rgba(100, 255, 218, 0.6);
+}
+
+/* Grid for charts */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+/* Individual chart card */
+.chart-card {
+    background: rgba(17, 34, 64, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    backdrop-filter: blur(6px);
+}
+
+.chart-card:hover {
+    transform: translateY(-7px) scale(1.02);
+    box-shadow: 0px 10px 24px rgba(0,0,0,0.7);
+    border: 1px solid #64ffda;
+}
+
+/* Dropdown / Filter section */
+.filter {
+    margin-bottom: 25px;
+    font-size: 1rem;
+    color: #e6f7ff;
+}
+
+.filter label {
+    margin-right: 12px;
+    font-weight: bold;
+    color: #64ffda;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.filter select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #64ffda;
+    background-color: #0d1117;
+    color: #e6f7ff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter select:hover {
+    border-color: #5eead4;
+    box-shadow: 0 0 8px rgba(94, 234, 212, 0.5);
+}
+
+.filter select:focus {
+    outline: none;
+    border-color: #5eead4;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.6);
+}
+
+.flashes {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  width: 340px;
+  max-width: 90%;
+}
+
+/* Base Alert Style */
+.alert {
+  margin: 10px 0;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+  animation: fadeIn 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Success (green glow) */
+.alert-success {
+  background: #0f3d2e;
+  border: 1px solid #00ff99;
+  color: #00ffcc;
+  box-shadow: 0 0 12px rgba(0, 255, 153, 0.6);
+}
+
+/* Danger (red glow) */
+.alert-danger {
+  background: #3d0f0f;
+  border: 1px solid #ff4d4d;
+  color: #ff6666;
+  box-shadow: 0 0 12px rgba(255, 77, 77, 0.6);
+}
+
+/* Warning (yellow glow) */
+.alert-warning {
+  background: #3d2a0f;
+  border: 1px solid #ffcc00;
+  color: #ffdb4d;
+  box-shadow: 0 0 12px rgba(255, 204, 0, 0.6);
+}
+
+/* Info (blue glow) */
+.alert-info {
+  background: #0f2a3d;
+  border: 1px solid #00bfff;
+  color: #87ceeb;
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.6);
+}
+
+/* Hover Glow Boost */
+.alert:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
+}

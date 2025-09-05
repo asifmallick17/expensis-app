@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Total Expenses</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='total_expennses.css') }}" />
+</head>
+<body>
+
+<header class="navbar">
+      <div class="logo">
+        <a href="/">
+          <img
+            src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
+            alt="Expensis Logo"
+            height="120"
+          />
+        </a>
+        <span>EXPENSIS</span>
+      </div>
+    </header>
+
+
+  <div class="table-container">
+    <h2>Total Expenses</h2>
+
+    <form method="GET" action="{{ url_for('total_expense') }}">
+      <label for="time-period">Show Expenses By:</label>
+      <select id="time-period" name="time_period" onchange="this.form.submit()">
+        <option value="day" {% if time_period == 'day' %}selected{% endif %}>Day</option>
+        <option value="month" {% if time_period == 'month' %}selected{% endif %}>Month</option>
+        <option value="year" {% if time_period == 'year' %}selected{% endif %}>Year</option>
+      </select>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          {% if time_period == 'day' %}
+          <th>Date</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Amount</th>
+          {% else %}
+          <th>{{ time_period.capitalize() }}</th>
+          <th>Category</th>
+          <th>Total Amount</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% if expenses %}
+          {% for expense in expenses %}
+            <tr>
+              {% if time_period == 'day' %}
+              <td>{{ expense['date'] }}</td>
+              <td>{{ expense['category'] }}</td>
+              <td>{{ expense['description'] }}</td>
+              <td>{{ expense['amount'] }}</td>
+              {% else %}
+              <td>{{ expense['time_group'] }}</td>
+              <td>{{ expense['category'] }}</td>
+              <td>{{ expense['total_amount'] }}</td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="4">No expenses record yet</td>
+          </tr>
+        {% endif %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="{% if time_period == 'day' %}3{% else %}2{% endif %}" class="total-label">Total</td>
+          <td class="total-amount">{{ total }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</body>
+</html>

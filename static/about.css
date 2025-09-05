@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #000;   /* Black background */
+    color: #f5f5f5;     /* Light text for contrast */
+    line-height: 1.6;
+}
+
+.navbar {
+    position: absolute; /* fix at top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(0, 0, 0);
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4facfe;
+    margin: 0; /* remove unwanted spacing */
+}
+
+.logo img {
+    margin-right: 8px;
+}
+
+
+h1 {
+    text-align: center;
+    color: #4facfe;     /* Blue accent for main title */
+    margin-bottom: 50px;
+}
+
+h2 {
+    color: #00f2fe;     /* Cyan-like accent for section titles */
+    margin-top: 25px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #ddd;        /* Softer white for paragraph text */
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li {
+    background: #1a1a1a;   /* Dark grey cards */
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-left: 5px solid #4facfe;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    font-size: 16px;
+    color: #f5f5f5;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+ul li:hover {
+    transform: translateX(5px);
+    background: #222;   /* Slightly lighter on hover */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}

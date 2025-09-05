@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Analysis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='view_analysis.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Unified Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <a href="/">
+        <img
+          src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
+          alt="Expensis Logo"
+          height="50"
+        />
+      </a>
+      <span>EXPENSIS</span>
+    </div>
+
+    <h1>Expense Analysis</h1>
+  </header>
+
+  <!-- Flash Message -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+<script>
+setTimeout(() => {
+    document.querySelectorAll('.alert').forEach(alert => {
+      alert.style.transition = "opacity 0.5s ease";
+      alert.style.opacity = "0";
+      setTimeout(() => alert.remove(), 500); // removes after fade-out
+    });
+  }, 3000); // 3 seconds
+</script>
+
+
+  <div class="container">
+    <h2>Your Expense Insights</h2>
+
+    <div class="filter">
+      <label for="time-period">Show Expenses By:</label>
+      <select id="time-period" name="time-period">
+        <option value="day" selected>Day</option>
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="year">Year</option>
+      </select>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <canvas id="pieChart"></canvas>
+      </div>
+     
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/view_analysis.js') }}"></script>
+</body>
+</html>

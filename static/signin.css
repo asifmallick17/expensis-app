@@ -1,0 +1,213 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Background */
+body {
+  background: #000000; /* black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color: #e0f7ff; /* light sky blue text */
+}
+
+/* Navbar / Logo positioning */
+.navbar {
+  position: absolute;   /* float on top */
+  top: 15px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 120px;  /* adjust logo size */
+}
+
+.logo span {
+  color: #00bfff;  /* sky blue text */
+  font-size: 20px;
+  
+  font-weight: bold;
+  letter-spacing: 2px;
+  position: absolute;
+  top: 45px;
+  left: 170px;
+
+}
+
+
+/* Container */
+.container {
+  background: #1a1a1a; /* dark grey/black */
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 191, 255, 0.3);
+  width: 320px;
+  margin-top: 60px;
+}
+h2{
+    color: #42c9f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    margin: 10px;
+    text-decoration-line: underline;
+    text-shadow: #1ec8ff;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px 0;
+  border: 1px solid #00bfff; /* sky blue border */
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  background: #1c1b1b; /* black input */
+  color: #ffffff;
+}
+
+input::placeholder {
+ /* lighter sky blue */
+   color: #87ceeb;
+}
+
+input:focus {
+  border-color: #1ec8ff;
+  box-shadow: 0 0 6px rgba(0, 191, 255, 0.7);
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #00bfff; /* sky blue */
+  color: #0d0d0d; /* black text */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1ec8ff; /* lighter sky blue */
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.7);
+}
+
+/* Sign-up link */
+p {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #87ceeb;
+}
+
+p a {
+  color: #00bfff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+p a:hover {
+  text-decoration: underline;
+  color: #1ec8ff;
+}
+
+/* Google Sign-in button */
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background: #1a1a1a; /* match container background */
+  border: 1px solid #00bfff; /* sky blue border */
+  color: #87ceeb;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.google-btn:hover {
+  background: #00bfff; /* sky blue */
+  color: #0d0d0d; /* black text */
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.7);
+}
+
+
+/* Flash Messages */
+.alert {
+  width: 320px; /* same as .container */
+  margin: 10px auto;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Success (green with sky blue glow) */
+.alert-success {
+  background: #0f3d2e;
+  border: 1px solid #00ff99;
+  color: #00ffcc;
+  box-shadow: 0 0 10px rgba(0, 255, 153, 0.6);
+}
+
+/* Danger (red with neon glow) */
+.alert-danger {
+  background: #3d0f0f;
+  border: 1px solid #ff4d4d;
+  color: #ff6666;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.6);
+}
+
+/* Warning (yellow-orange) */
+.alert-warning {
+  background: #3d2a0f;
+  border: 1px solid #ffcc00;
+  color: #ffdb4d;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+}
+
+/* Info (sky blue highlight) */
+.alert-info {
+  background: #0f2a3d;
+  border: 1px solid #00bfff;
+  color: #87ceeb;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

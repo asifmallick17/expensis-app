@@ -1,0 +1,211 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Full black background */
+    color: skyblue; /* Default text in sky blue */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 12px 25px;
+    background: rgb(0, 0, 0);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4facfe;
+}
+
+.logo img {
+       margin-right: 5px;
+
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #fafafa;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar nav a:hover {
+    color: #4facfe;
+    text-decoration: underline;
+}
+
+
+.container {
+    width: 60%;
+    margin: 50px auto;
+    background: #0d0d0d; /* Dark black shade for contrast */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(135, 206, 235, 0.5); /* Sky blue glow */
+}
+
+h2, h3 {
+    text-align: center;
+    color: skyblue;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input, select, textarea, button {
+    padding: 10px;
+    border: 1px solid skyblue; /* Sky blue border */
+    border-radius: 5px;
+    outline: none;
+}
+
+input, select, textarea {
+    background: #111; /* Blackish input background */
+    color: skyblue;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #87ceebcc; /* Sky blue faded placeholder */
+}
+
+button {
+    background: skyblue;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #1ec0ff; /* Brighter blue on hover */
+    color: #000;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid skyblue;
+    padding: 10px;
+    text-align: center;
+    color: skyblue;
+}
+
+th {
+    background: #0d0d0d;
+}
+
+#show_report_btn {
+    color: black;
+    background: skyblue;
+    margin: 80px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+#show_report_btn:hover {
+    background: #1ec0ff;
+    color: black;
+}
+
+/* Flash Messages Container */
+.flashes {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  width: 340px;
+  max-width: 90%;
+}
+
+/* Base Alert Style */
+.alert {
+  margin: 10px 0;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+  animation: fadeIn 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Success (green glow) */
+.alert-success {
+  background: #0f3d2e;
+  border: 1px solid #00ff99;
+  color: #00ffcc;
+  box-shadow: 0 0 12px rgba(0, 255, 153, 0.6);
+}
+
+/* Danger (red glow) */
+.alert-danger {
+  background: #3d0f0f;
+  border: 1px solid #ff4d4d;
+  color: #ff6666;
+  box-shadow: 0 0 12px rgba(255, 77, 77, 0.6);
+}
+
+/* Warning (yellow glow) */
+.alert-warning {
+  background: #3d2a0f;
+  border: 1px solid #ffcc00;
+  color: #ffdb4d;
+  box-shadow: 0 0 12px rgba(255, 204, 0, 0.6);
+}
+
+/* Info (blue glow) */
+.alert-info {
+  background: #0f2a3d;
+  border: 1px solid #00bfff;
+  color: #87ceeb;
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.6);
+}
+
+/* Hover Glow Boost */
+.alert:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

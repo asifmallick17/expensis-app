@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EXPENSIS - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo">
+        <a href="/">
+          <img
+            src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
+            alt="Expensis Logo"
+            height="120"
+          />
+        </a>
+        <span>EXPENSIS</span>
+      </div>
+
+      <!-- Hamburger for small devices -->
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+      <nav id="nav-links">
+        {% if session.get('user') %}
+        <!-- Show dropdown if user is logged in -->
+        <div class="dropdown">
+          <button class="dropbtn">{{ session['user']['name'] }}</button>
+          <div class="dropdown-content">
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+          </div>
+        </div>
+        {% else %}
+        <!-- Show normal Sign-in if not logged in -->
+        <a href="{{ url_for('signin') }}">Sign-in</a>
+        {% endif %}
+
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Welcome to EXPENSIS</h1>
+      <h3>AI-Powered Expense Tracker for Smarter Finances</h3>
+      <div class="btn-container">
+        <button onclick="window.location.href='{{ url_for('add_expense') }}'">
+          Add Expense
+        </button>
+        <button onclick="window.location.href='{{ url_for('show_expense') }}'">
+          Show Expense
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 EXPENSIS | All Rights Reserved</p>
+      <p>Developed by Asif Mallick</p>
+    </footer>
+
+    <!-- Script for menu toggle -->
+    <script>
+      function toggleMenu() {
+        const nav = document.getElementById("nav-links");
+        nav.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

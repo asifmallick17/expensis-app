@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Reports</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='report.css')}}">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Expense Analysis Section -->
+    <div class="analysis">
+      <h3>Your Expense Reports</h3>
+      <p>Choose time period:</p>
+      <select id="time-filter">
+        <option value="day">Day</option>
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="year">Year</option>
+      </select>
+
+      <div class="report-links">
+        <a href="expenses_list.html" class="btn">View Expense List</a>
+        <a href="total_expense.html" class="btn">View Total Expense</a>
+        <a href="graph.html" class="btn">View Expense Graph</a>
+      </div>
+    </div>
+
+    <!-- AI Insights Section -->
+    <div class="ai-insights">
+      <h3>💡 AI Insights</h3>
+      <p>Comming soon....</p>
+      
+    </div>
+
+  </div>
+</body>
+</html>

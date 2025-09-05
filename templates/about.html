@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css')}}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo">
+        <a href="/">
+          <img
+            src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
+            alt="Expensis Logo"
+            height="120"
+          />
+        </a>
+        <span>EXPENSIS</span>
+      </div>
+      
+      </header>
+
+    <h1>Presenting to you EXPENSIS</h1>
+
+    <h2>Mission</h2>
+    <p>Our mission is to simplify personal finance management by providing a unified platform where users can track expenses, manage budgets, and plan savings for the future. We aim to empower individuals to achieve financial stability and make smarter decisions that support both present needs and long-term goals.</p>
+
+    <h2>Vision</h2>
+    <p>We envision EXPENSIS as a trusted financial companion for students, professionals, and families alike. By combining simplicity, security, and powerful analytics, EXPENSIS strives to help users not only understand their current spending but also build a sustainable savings habit that secures their financial future.</p>
+
+    <h2>Key Features</h2>
+    <ul>
+        <li>💸 <strong>Expense Tracking</strong> – Record and categorize daily expenses with ease.</li>
+        <li>📊 <strong>Analytics Dashboard</strong> – Visualize spending habits with charts and reports.</li>
+        <li>🔒 <strong>Data Security</strong> – Ensure privacy and safety of all financial data.</li>
+        <li>🎯 <strong>Budget Planning</strong> – Set financial goals and track progress effectively.</li>
+        <li>💰 <strong>Future Savings</strong> – Plan and allocate money toward short-term and long-term savings goals.</li>
+    </ul>
+</body>
+</html>

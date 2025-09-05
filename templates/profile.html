@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+</head>
+<body>
+  <!-- Logo/Header -->
+  <header class="logo-header">
+    <a href="/"><img src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
+            alt="Expensis Logo"
+            height="120"/>
+    </a>
+    <span class="app-name">EXPENSIS</span>
+  </header>
+
+  <!-- Profile Card -->
+  <div class="profile-card">
+    <img src="{{ user['picture'] if user['picture'] else url_for('static', filename='images/default-profile.jpg') }}" 
+     alt="Profile Picture" 
+     class="profile-pic">
+
+    <h2>{{ user['name'] }}</h2>
+    <p><strong>Email:</strong> {{ user['email'] }}</p>
+    <button onclick="window.location.href='{{ url_for('logout') }}'" class="logout-btn">Logout</button>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+     

@@ -1,0 +1,68 @@
+/* General page setup */
+body {
+  font-family: Arial, sans-serif;
+  background: #000000;
+  color: #00cfff;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo/Header */
+.logo-header {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.app-name {
+  margin-left: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #00cfff;
+}
+
+/* Profile Card Center */
+.profile-card {
+  background: #111;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  width: 320px;
+
+  /* Centering */
+  margin: auto; /* pushes to center */
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #00cfff;
+}
+
+.logout-btn {
+  background: #00cfff;
+  color: #111;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.logout-btn:hover {
+  background: #00aacc;
+}

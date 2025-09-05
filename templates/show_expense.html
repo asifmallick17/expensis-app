@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Show Expense</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='show_expense.css')}}" />
+</head>
+<body>
+
+<header class="navbar">
+      <div class="logo">
+        <a href="/">
+          <img
+            src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
+            alt="Expensis Logo"
+            height="120"
+          />
+        </a>
+        <span>EXPENSIS</span>
+      </div>
+    </header>
+
+
+  <div class="container">
+    <h1>Expense Dashboard</h1>
+
+    <div class="buttons">
+      <button onclick="window.location.href='{{('total_expenses') }}'" type="submit">Total Expenses</button>
+      <button onclick="window.location.href='{{('view_analysis') }}'" type="submit">View Analysis</button>
+    </div>
+
+    <p class="ai-info">
+      AI Insights.
+      <br>
+       Smarter expense analysis coming your way.
+      <br>
+      <br>
+      Comming soon...
+    </p>
+  </div>
+</body>
+</html>

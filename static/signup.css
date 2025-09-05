@@ -1,0 +1,109 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Background */
+body {
+  background: #000000; /* black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color: #e0f7ff; /* light sky blue text */
+}
+
+/* Navbar / Logo positioning */
+.navbar {
+  position: absolute;   /* float on top */
+  top: 15px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 120px;  /* adjust logo size */
+}
+
+.logo span {
+  color: #00bfff;  /* sky blue text */
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  position: absolute;
+  top: 45px;
+  left: 170px;
+}
+
+/* Profile Container */
+.profile-container {
+  background: #1a1a1a; /* dark grey/black */
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 191, 255, 0.3);
+  width: 340px;
+}
+
+.profile-container h2 {
+  color: #42c9f6;
+  text-align: center;
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+
+/* Labels */
+label {
+  color: #87ceeb;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px 0;
+  border: 1px solid #00bfff; /* sky blue border */
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  background: #1c1b1b; /* black input */
+  color: #e0f7ff;
+}
+
+input::placeholder {
+  color: #87ceeb; /* lighter sky blue */
+}
+
+input:focus {
+  border-color: #1ec8ff;
+  box-shadow: 0 0 6px rgba(0, 191, 255, 0.7);
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #00bfff; /* sky blue */
+  color: #0d0d0d; /* black text */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1ec8ff; /* lighter sky blue */
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.7);
+}
