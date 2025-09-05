@@ -10,7 +10,9 @@ load_dotenv()
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY")
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['GOOGLE_CLIENT_ID'] = os.environ.get('GOOGLE_CLIENT_ID')
+app.config['GOOGLE_CLIENT_SECRET'] = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 # DB Setup 
 DB_NAME = "expensis.db"
