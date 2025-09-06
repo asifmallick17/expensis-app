@@ -64,24 +64,30 @@
     </footer>
 
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const dropbtn = document.querySelector(".dropbtn");
-    if (dropbtn) {
-      dropbtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const dropdown = dropbtn.nextElementSibling;
-        dropdown.classList.toggle("show");
-      });
+      // Hamburger toggle
+      function toggleMenu() {
+        const navLinks = document.getElementById("nav-links");
+        navLinks.classList.toggle("active");
+      }
 
-      // Close dropdown when clicking outside
-      document.addEventListener("click", () => {
-        document.querySelectorAll(".dropdown-content").forEach((menu) => {
-          menu.classList.remove("show");
-        });
-      });
-    }
-  });
-</script>
+      // Dropdown toggle
+      document.addEventListener("DOMContentLoaded", () => {
+        const dropbtn = document.querySelector(".dropbtn");
+        if (dropbtn) {
+          dropbtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const dropdown = dropbtn.nextElementSibling;
+            dropdown.classList.toggle("show");
+          });
 
+          // Close dropdown when clicking outside
+          document.addEventListener("click", () => {
+            document.querySelectorAll(".dropdown-content").forEach((menu) => {
+              menu.classList.remove("show");
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html>
