@@ -14,7 +14,7 @@
           <img
             src="{{ url_for('static', filename='images/Expensis Logo.png') }}"
             alt="Expensis Logo"
-            height="60"
+            height="120"
           />
         </a>
         <span>EXPENSIS</span>
@@ -25,7 +25,7 @@
 
       <nav id="nav-links">
         {% if session.get('user') %}
-        <!-- Dropdown for logged-in user -->
+        <!-- Show dropdown if user is logged in -->
         <div class="dropdown">
           <button class="dropbtn">{{ session['user']['name'] }}</button>
           <div class="dropdown-content">
@@ -34,6 +34,7 @@
           </div>
         </div>
         {% else %}
+        <!-- Show normal Sign-in if not logged in -->
         <a href="{{ url_for('signin') }}">Sign-in</a>
         {% endif %}
 
@@ -45,7 +46,7 @@
     <!-- Hero Section -->
     <section class="hero">
       <h1>Welcome to EXPENSIS</h1>
-      <p>AI-Powered Expense Tracker for Smarter Finances</p>
+      <h3>AI-Powered Expense Tracker for Smarter Finances</h3>
       <div class="btn-container">
         <button onclick="window.location.href='{{ url_for('add_expense') }}'">
           Add Expense
@@ -66,7 +67,7 @@
       // Hamburger toggle
       function toggleMenu() {
         const navLinks = document.getElementById("nav-links");
-        navLinks.classList.toggle("show");
+        navLinks.classList.toggle("active");
       }
 
       // Dropdown toggle

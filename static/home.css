@@ -1,51 +1,60 @@
+/* General Styles */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #4facfe, #00f2fe);
-    color: #000000;
-    overflow-y: hidden;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #4facfe, #00f2fe); /* Sky blue gradient */
+  color: #000;
+  overflow-x: hidden;
 }
 
 /* Navbar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    background: rgb(0, 0, 0);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: black; /* Header black */
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    font-weight: bold;
-    color: #4facfe;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #4facfe;
 }
 
 .logo img {
-    margin-right: 10px;
+  height: 60px;
 }
 
-.navbar nav a {
+/* Nav Links */
+#nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+#nav-links a {
   text-decoration: none;
   color: #fafafa;
   font-weight: 500;
-  position: relative;
-  padding: 6px 12px;
+  padding: 8px 15px;
   border-radius: 6px;
   transition: all 0.3s ease;
+  position: relative;
 }
 
-/* Fancy hover effect */
-.navbar nav a::after {
+#nav-links a::after {
   content: "";
   position: absolute;
-  bottom: -3px;
+  bottom: 0;
   left: 0;
   width: 0%;
   height: 2px;
@@ -53,169 +62,163 @@ body {
   transition: width 0.3s ease;
 }
 
-.navbar nav {
-  overflow: hidden;
-}
-
-.navbar nav a:hover {
+#nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
   color: #4facfe;
-  background: rgba(254, 158, 79, 0.15);
 }
 
-.navbar nav a:hover::after {
+#nav-links a:hover::after {
   width: 100%;
 }
 
-/* Active link highlight */
-.navbar nav a.active {
-  color: #4facfe;
-  font-weight: bold;
-  background: rgba(79, 172, 254, 0.25);
-  border-radius: 6px;
+/* Hamburger */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fafafa;
 }
 
-/* Dropdown container */
+/* Dropdown */
 .dropdown {
   position: relative;
-  display: inline-block;
 }
 
-/* Button */
 .dropbtn {
-  background-color: #000;
-  color: white;
-  padding: 10px 16px;
-  font-size: 16px;
+  background: none;
   border: none;
+  color: white;
+  font-size: 16px;
   cursor: pointer;
+  padding: 8px 12px;
   border-radius: 6px;
+  transition: all 0.3s;
 }
 
-/* Dropdown content (hidden by default) */
+.dropbtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #4facfe;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: white;
+  right: 0;
+  background-color: black;
   min-width: 140px;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 999;
+  z-index: 100;
+  flex-direction: column;
   border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
-/* Dropdown links */
 .dropdown-content a {
-  color: black;
-  padding: 10px 14px;
+  color: #fafafa;
+  padding: 12px 15px;
   text-decoration: none;
   display: block;
+  transition: all 0.3s;
 }
 
-/* Hover effect */
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background: #4facfe;
+  color: white;
 }
 
-/* When .show is toggled, make dropdown visible */
 .dropdown-content.show {
-  display: block;
+  display: flex;
 }
 
 /* Hero Section */
 .hero {
-    text-align: center;
-    padding: 100px 20px;
+  text-align: center;
+  padding: 100px 20px;
 }
 
 .hero h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
-    color: rgb(0, 0, 0);
+  font-size: 48px;
+  margin-bottom: 15px;
+  color: black;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
 .hero p {
-    font-size: 18px;
-    margin-bottom: 40px;
-    color: #000000;
+  font-size: 20px;
+  margin-bottom: 40px;
+  color: black;
 }
 
 /* Buttons */
-.btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+.hero .btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
 }
 
-button {
-    background: rgb(255, 255, 255);
-    color: #0079e3;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-    border: 2px solid rgb(0, 0, 0);
+.hero button {
+  padding: 18px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  border: 2px solid black;
+  cursor: pointer;
+  background: #000;
+  color: #4facfe;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-button:hover {
-    background: #4facfe;
-    color: white;
+.hero button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #4facfe;
+  transition: all 0.3s ease;
+  z-index: 0;
+}
+
+.hero button:hover::before {
+  left: 0;
+}
+
+.hero button:hover {
+  color: white;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+.hero button span {
+  position: relative;
+  z-index: 1;
 }
 
 /* Footer */
 footer {
-    text-align: center;
-    padding: 15px;
-    background: linear-gradient(to right, #4facfe, #00f2fe);
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    font-size: 14px;
-    color: #000000;
-    margin-top: 50px;
+  text-align: center;
+  padding: 15px;
+  background: black;
+  color: #fafafa;
+  font-size: 14px;
+  margin-top: 50px;
 }
 
-/* Hamburger menu */
-.hamburger {
-  display: none;
-  font-size: 26px;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* =====================
-   RESPONSIVE DESIGN
-   ===================== */
-
-/* Tablets */
-@media (max-width: 992px) {
-  .hero h1 {
-    font-size: 32px;
-  }
-
-  .hero p {
-    font-size: 16px;
-  }
-
-  .navbar nav {
-    gap: 15px;
-  }
-}
-
-/* Mobiles */
+/* Small devices */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
   }
 
-  .navbar nav {
+  #nav-links {
     display: none;
     flex-direction: column;
     align-items: center;
-    background: #000;
+    background: black;
     position: absolute;
     top: 70px;
     left: 50%;
@@ -224,19 +227,28 @@ footer {
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 100;
   }
 
-  .navbar nav.show {
+  #nav-links.active {
     display: flex;
     animation: slideDown 0.3s ease forwards;
   }
 
-  .navbar nav a {
-    padding: 12px 0;
-    text-align: center;
+  #nav-links a, .dropbtn {
     width: 100%;
-    color: #fafafa;
+    text-align: center;
+    padding: 12px 0;
+  }
+
+  .dropdown-content {
+    position: relative;
+    right: auto;
+    width: 100%;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .hero {
@@ -244,11 +256,11 @@ footer {
   }
 
   .hero h1 {
-    font-size: 26px;
+    font-size: 32px;
   }
 
   .hero p {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .btn-container {
@@ -257,29 +269,24 @@ footer {
     align-items: center;
   }
 
-  button {
+  .hero button {
     width: 100%;
     max-width: 280px;
-  }
-
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 }
 
 /* Very small devices */
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .hero p {
-    font-size: 13px;
+    font-size: 14px;
   }
 
-  button {
-    font-size: 16px;
-    padding: 12px 25px;
+  .hero button {
+    font-size: 18px;
+    padding: 14px 25px;
   }
 }
