@@ -63,32 +63,25 @@
       <p>Developed by Asif Mallick</p>
     </footer>
 
-    <!-- Script for menu toggle -->
     <script>
-      function toggleMenu() {
-        const nav = document.getElementById("nav-links");
-        nav.classList.toggle("show");
-      }
-
-      // Dropdown toggle on click
-      document.addEventListener("DOMContentLoaded", () => {
-        const dropbtn = document.querySelector(".dropbtn");
-        if (dropbtn) {
-          dropbtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const dropdown = dropbtn.nextElementSibling;
-            dropdown.style.display =
-              dropdown.style.display === "block" ? "none" : "block";
-          });
-
-          // Close dropdown when clicking outside
-          document.addEventListener("click", () => {
-            document.querySelectorAll(".dropdown-content").forEach((menu) => {
-              menu.style.display = "none";
-            });
-          });
-        }
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropbtn = document.querySelector(".dropbtn");
+    if (dropbtn) {
+      dropbtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const dropdown = dropbtn.nextElementSibling;
+        dropdown.classList.toggle("show");
       });
-    </script>
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", () => {
+        document.querySelectorAll(".dropdown-content").forEach((menu) => {
+          menu.classList.remove("show");
+        });
+      });
+    }
+  });
+</script>
+
   </body>
 </html>

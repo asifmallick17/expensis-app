@@ -83,60 +83,45 @@ body {
   display: inline-block;
 }
 
-/* Dropdown button (username) */
+/* Button */
 .dropbtn {
-  background: none;
-  border: none;
+  background-color: #000; /* adjust to match navbar */
+  color: white;
+  padding: 10px 16px;
   font-size: 16px;
+  border: none;
   cursor: pointer;
-  color: #00cfff;
-  font-weight: bold;
-  padding: 6px 12px;
   border-radius: 6px;
-  transition: all 0.3s ease;
 }
 
-.dropbtn:hover {
-  background: rgba(79, 172, 254, 0.15);
-  color: #4facfe;
-}
-
-/* Dropdown content box */
+/* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
   position: absolute;
-  right: 0;
-  background-color: #111;
-  min-width: 160px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0px 6px 12px rgba(0,0,0,0.4);
-  z-index: 1;
-  padding: 5px 0;
-}
-
-/* Dropdown links styled like navbar */
-.dropdown-content a {
-  display: block;
-  padding: 10px 15px;
-  text-decoration: none;
-  color: #fafafa;
-  font-weight: 500;
-  position: relative;
-  transition: all 0.3s ease;
+  background-color: white;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 999; /* make sure it stays on top */
   border-radius: 6px;
 }
 
-/* Hover effect for dropdown links */
-.dropdown-content a:hover {
-  background: rgba(79, 172, 254, 0.15);
-  color: #4facfe;
+/* Dropdown links */
+.dropdown-content a {
+  color: black;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
 }
 
-/* Show dropdown on hover
-.dropdown:hover .dropdown-content {
+/* Hover effect */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* When .show is toggled, make dropdown visible */
+.dropdown-content.show {
   display: block;
-} */
+}
 
 
 /* Hero Section */
