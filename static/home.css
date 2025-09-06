@@ -133,10 +133,10 @@ body {
   color: #4facfe;
 }
 
-/* Show dropdown on hover */
+/* Show dropdown on hover
 .dropdown:hover .dropdown-content {
   display: block;
-}
+} */
 
 
 /* Hero Section */

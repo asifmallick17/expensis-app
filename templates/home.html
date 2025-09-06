@@ -40,7 +40,6 @@
 
         <a href="{{ url_for('about') }}">About</a>
         <a href="{{ url_for('contact') }}">Contact</a>
-        
       </nav>
     </header>
 
@@ -70,6 +69,26 @@
         const nav = document.getElementById("nav-links");
         nav.classList.toggle("show");
       }
+
+      // Dropdown toggle on click
+      document.addEventListener("DOMContentLoaded", () => {
+        const dropbtn = document.querySelector(".dropbtn");
+        if (dropbtn) {
+          dropbtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const dropdown = dropbtn.nextElementSibling;
+            dropdown.style.display =
+              dropdown.style.display === "block" ? "none" : "block";
+          });
+
+          // Close dropdown when clicking outside
+          document.addEventListener("click", () => {
+            document.querySelectorAll(".dropdown-content").forEach((menu) => {
+              menu.style.display = "none";
+            });
+          });
+        }
+      });
     </script>
   </body>
 </html>
