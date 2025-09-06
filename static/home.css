@@ -2,7 +2,11 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #4facfe, #00f2fe); /* Sky blue gradient */
+  background: linear-gradient(
+    to right,
+    #4facfe,
+    #00f2fe
+  ); /* Sky blue gradient */
   color: #000;
   overflow-x: hidden;
 }
@@ -18,7 +22,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -110,7 +114,7 @@ body {
   flex-direction: column;
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .dropdown-content a {
@@ -140,7 +144,7 @@ body {
   font-size: 48px;
   margin-bottom: 15px;
   color: black;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .hero p {
@@ -166,14 +170,14 @@ body {
   cursor: pointer;
   background: #ffffff;
   color: #4facfe;
-  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
 .hero button::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -182,7 +186,7 @@ body {
   background: #4facfe;
   color: black;
   transition: all 0.3s ease;
-  z-index: 0;
+  z-index: -1;
 }
 
 .hero button:hover::before {
@@ -191,7 +195,7 @@ body {
 
 .hero button:hover {
   color: white;
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 .hero button span {
@@ -227,7 +231,7 @@ footer {
     width: 220px;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
 
   #nav-links.active {
@@ -235,7 +239,8 @@ footer {
     animation: slideDown 0.3s ease forwards;
   }
 
-  #nav-links a, .dropbtn {
+  #nav-links a,
+  .dropbtn {
     width: 100%;
     text-align: center;
     padding: 12px 0;
@@ -248,8 +253,14 @@ footer {
   }
 
   @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .hero {
