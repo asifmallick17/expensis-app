@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #4facfe, #00f2fe);
     color: #000000;
+    overflow-y: hidden;
 }
 
 /* Navbar */
@@ -53,9 +54,14 @@ body {
   transition: width 0.3s ease;
 }
 
+.navbar nav {
+  overflow: hidden; /* prevents ::after from showing outside */
+}
+
+
 .navbar nav a:hover {
   color: #4facfe;
-  background: rgba(79, 172, 254, 0.15);
+  background: rgba(254, 158, 79, 0.15);
 }
 
 .navbar nav a:hover::after {

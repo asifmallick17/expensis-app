@@ -10,13 +10,17 @@ load_dotenv()
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback_secret')
+
 app.config['GOOGLE_CLIENT_ID'] = os.environ.get('GOOGLE_CLIENT_ID')
 app.config['GOOGLE_CLIENT_SECRET'] = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 # DB Setup 
-DB_NAME = "expensis.db"
-DATABASE_DIR = 'databases'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_NAME = os.path.join(BASE_DIR, "expensis.db")
+DATABASE_DIR = os.path.join(BASE_DIR, "databases")
+
 os.makedirs(DATABASE_DIR, exist_ok=True)
 
 # ------------------ Database Functions ------------------
@@ -140,9 +144,10 @@ def signup():
             )
             conn.commit()
             conn.close()
-            session['name'] = name
+            session['user'] = {"name": name, "email": email, "picture": None}
+
             flash("Sign up successful! You are now logged in.", "success")
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('home'))
         except sqlite3.IntegrityError:
             conn.close()
             flash("Username or Email already exists!", "danger")
