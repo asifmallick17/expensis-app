@@ -1,137 +1,285 @@
-/* General Styles */
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-  color: #000;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #000000;
+    overflow-y: hidden;
 }
 
 /* Navbar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: black;
-  color: white;
-  position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: rgb(0, 0, 0);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4facfe;
 }
 
-#nav-links {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+.logo img {
+    margin-right: 10px;
 }
 
-/* Hamburger */
-.hamburger {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-/* Dropdown */
-.dropdown {
+.navbar nav a {
+  text-decoration: none;
+  color: #fafafa;
+  font-weight: 500;
   position: relative;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
-.dropbtn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.dropdown-content {
-  display: none;
+/* Fancy hover effect */
+.navbar nav a::after {
+  content: "";
   position: absolute;
-  right: 0;
-  background-color: black;
-  min-width: 120px;
-  z-index: 1;
-  flex-direction: column;
-  border-radius: 5px;
+  bottom: -3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #4facfe;
+  transition: width 0.3s ease;
+}
+
+.navbar nav {
   overflow: hidden;
 }
 
-.dropdown-content a {
+.navbar nav a:hover {
+  color: #4facfe;
+  background: rgba(254, 158, 79, 0.15);
+}
+
+.navbar nav a:hover::after {
+  width: 100%;
+}
+
+/* Active link highlight */
+.navbar nav a.active {
+  color: #4facfe;
+  font-weight: bold;
+  background: rgba(79, 172, 254, 0.25);
+  border-radius: 6px;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Button */
+.dropbtn {
+  background-color: #000;
   color: white;
-  padding: 10px 15px;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-radius: 6px;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  color: black;
+  padding: 10px 14px;
   text-decoration: none;
   display: block;
 }
 
+/* Hover effect */
 .dropdown-content a:hover {
-  background-color: #333;
+  background-color: #f1f1f1;
 }
 
+/* When .show is toggled, make dropdown visible */
 .dropdown-content.show {
-  display: flex;
+  display: block;
 }
 
 /* Hero Section */
 .hero {
-  text-align: center;
-  padding: 100px 20px;
+    text-align: center;
+    padding: 100px 20px;
 }
 
-.hero .btn-container {
-  margin-top: 20px;
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    color: rgb(0, 0, 0);
 }
 
-.hero button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+.hero p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #000000;
 }
 
-.hero button:hover {
-  background-color: #333;
+/* Buttons */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    background: rgb(255, 255, 255);
+    color: #0079e3;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+button:hover {
+    background: #4facfe;
+    color: white;
 }
 
 /* Footer */
 footer {
-  text-align: center;
-  padding: 15px;
-  background: black;
-  color: white;
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    color: #000000;
+    margin-top: 50px;
 }
 
-/* Small devices */
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* =====================
+   RESPONSIVE DESIGN
+   ===================== */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .navbar nav {
+    gap: 15px;
+  }
+}
+
+/* Mobiles */
 @media (max-width: 768px) {
-  #nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    background: black;
-    padding: 15px;
-    border-radius: 8px;
-    width: 150px;
-  }
-
-  #nav-links.active {
-    display: flex;
-  }
-
   .hamburger {
     display: block;
   }
 
-  .dropdown-content {
-    position: relative;
-    right: auto;
+  .navbar nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: #000;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 100;
+  }
+
+  .navbar nav.show {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  .navbar nav a {
+    padding: 12px 0;
+    text-align: center;
+    width: 100%;
+    color: #fafafa;
+  }
+
+  .hero {
+    padding: 60px 15px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  button {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Very small devices */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px 25px;
   }
 }
