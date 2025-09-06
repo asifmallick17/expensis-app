@@ -11,31 +11,28 @@ body {
   overflow-x: hidden;
 }
 
-/* Navbar */
+/* Navbar / Logo positioning */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: black; /* Header black */
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.logo {
+  position: absolute;   /* float on top */
+  top: 15px;
+  left: 20px;
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #4facfe;
 }
 
 .logo img {
-  height: 60px;
+  height: 120px;  /* adjust logo size */
+}
+
+.logo span {
+  color: #00bfff;  /* sky blue text */
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  position: absolute;
+  top: 45px;
+  left: 170px;
 }
 
 /* Nav Links */
@@ -166,41 +163,18 @@ body {
   font-size: 20px;
   font-weight: bold;
   border-radius: 12px;
-  border: 2px solid black;
+  border: 2px solid #4facfe;
   cursor: pointer;
-  background: #ffffff;
-  color: #4facfe;
+  background: #ffffff;   /* Default background */
+  color: #4facfe;        /* Default text color */
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: #4facfe;
-  color: black;
-  transition: all 0.3s ease;
-  z-index: -1;
-}
-
-.hero button:hover::before {
-  left: 0;
+  transition: all 0.3s ease;  /* Smooth transition */
 }
 
 .hero button:hover {
-  color: white;
+  background: #4facfe;  /* Hover background */
+  color: #ffffff;       /* Hover text color */
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-}
-
-.hero button span {
-  position: relative;
-  z-index: 1;
 }
 
 /* Footer */
