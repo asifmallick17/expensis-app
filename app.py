@@ -144,10 +144,9 @@ def signup():
             )
             conn.commit()
             conn.close()
-            session['user'] = {"name": name, "email": email, "picture": None}
 
-            flash("Sign up successful! You are now logged in.", "success")
-            return redirect(url_for('home'))
+            flash("Sign up successful! Please sign in.", "success")
+            return redirect(url_for('signin'))   # 👈 redirect to signin instead of home
         except sqlite3.IntegrityError:
             conn.close()
             flash("Username or Email already exists!", "danger")
