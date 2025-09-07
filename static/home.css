@@ -50,6 +50,7 @@ body {
   gap: 20px;
   align-items: center;
   margin-left: auto; /* ensures links are pushed right */
+  padding-right: 20px;
 }
 
 #nav-links a {
@@ -201,11 +202,11 @@ footer {
 @media (max-width: 768px) {
   .hamburger {
     display: block;
-    margin-right: 10px; /* move slightly left from edge */
+    margin-right: 5px; /* move slightly left from edge */
   }
 
   .navbar {
-    padding: 10px 15px; /* adjust padding so ☰ doesn’t go outside */
+    padding: 10px 10px; /* adjust padding so ☰ doesn’t go outside */
   }
 
   #nav-links {
