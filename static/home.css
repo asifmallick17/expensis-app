@@ -40,9 +40,9 @@ body {
   font-weight: bold;
   letter-spacing: 2px;
   position: absolute;
-  top: 65px;
+  top: 60px;
   left: 170px;
-  padding: 5px;
+  padding: 8px;
 }
 
 /* Nav Links */
@@ -207,7 +207,7 @@ footer {
   }
 
   .navbar {
-    padding: 10px 40px; /* adjust padding so ☰ doesn’t go outside */
+    padding: 10px 20px; /* adjust padding so ☰ doesn’t go outside */
   }
 
   #nav-links {
