@@ -127,6 +127,11 @@ def add_expense():
         return redirect(url_for("add_expense"))
     return render_template("add_expense.html")
 
+@app.route("/show_expense")
+def show_expense():
+    return render_template("show_expense.html")
+
+
 @app.route("/total_expenses")
 def total_expense():
     if "user" not in session:
