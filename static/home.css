@@ -40,7 +40,7 @@ body {
   font-weight: bold;
   letter-spacing: 2px;
   position: absolute;
-  top: 45px;
+  top: 50px;
   left: 170px;
 }
 
@@ -194,7 +194,7 @@ footer {
   background: linear-gradient(to right, #4facfe, #00f2fe);
   color: #000000;
   font-size: 14px;
-  margin-top: 50px;
+  margin-top: 38px;
 }
 
 /* Small devices */
