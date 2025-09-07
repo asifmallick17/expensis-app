@@ -144,7 +144,7 @@ body {
 /* Hero Section */
 .hero {
   text-align: center;
-  padding: 100px 20px;
+  padding: 90px 20px;
 }
 
 .hero h1 {
@@ -194,7 +194,7 @@ footer {
   background: linear-gradient(to right, #4facfe, #00f2fe);
   color: #000000;
   font-size: 14px;
-  margin-top: 38px;
+  margin-top: 30px;
 }
 
 /* Small devices */
