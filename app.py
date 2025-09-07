@@ -184,20 +184,39 @@ def google_login():
 
     resp = google.get("/oauth2/v2/userinfo")
     if not resp.ok:
-        return "Failed to fetch user info from Google."
+        flash("Failed to fetch user info from Google.", "danger")
+        return redirect(url_for("signin"))
 
     user_info = resp.json()
-    email, name, picture = user_info.get("email"), user_info.get("name"), user_info.get("picture")
+    email = user_info.get("email")
+    name = user_info.get("name")
+    picture = user_info.get("picture")
 
-    # Save user in DB if not exists
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        user = User(name=name, email=email, picture=picture)
-        db.session.add(user)
-        db.session.commit()
+    if not email:
+        flash("Google account does not have an email associated.", "danger")
+        return redirect(url_for("signin"))
 
+    try:
+        # Check if user already exists
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            # Create new user
+            user = User(name=name, email=email, picture=picture)
+            db.session.add(user)
+            db.session.commit()
+        
+    except Exception as e:
+        db.session.rollback()  # important to prevent session errors
+        print("Error saving Google user:", e)
+        flash("Login failed due to a database error. Try again.", "danger")
+        return redirect(url_for("signin"))
+
+    # Set session
     session["user"] = {"name": name, "email": email, "picture": picture}
+    flash("Signed in successfully via Google!", "success")
     return redirect(url_for("home"))
+
 
 @app.route("/profile")
 def profile():
