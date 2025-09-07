@@ -40,8 +40,9 @@ body {
   font-weight: bold;
   letter-spacing: 2px;
   position: absolute;
-  top: 50px;
+  top: 65px;
   left: 170px;
+  padding: 5px;
 }
 
 /* Nav Links */
@@ -109,7 +110,7 @@ body {
 
 .dropbtn:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: #4facfe;
+  color: #00f2fe;
 }
 
 .dropdown-content {
@@ -134,7 +135,7 @@ body {
 }
 
 .dropdown-content a:hover {
-  background: #4facfe;
+  background: #00f2fe;
   color: white;
 }
 
