@@ -36,11 +36,11 @@ body {
 
 .logo span {
   color: #00bfff; /* sky blue text */
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   position: absolute;
-  top: 57px;
+  top: 55px;
   left: 170px;
   padding: 7px;
 }
@@ -207,7 +207,7 @@ footer {
   }
 
   .navbar {
-    padding: 10px 20px; /* adjust padding so ☰ doesn’t go outside */
+    padding: 10px 18px; /* adjust padding so ☰ doesn’t go outside */
   }
 
   #nav-links {
