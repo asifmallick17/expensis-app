@@ -14,14 +14,13 @@ body {
 /* Navbar / Logo positioning */
 .navbar {
   background-color: black;
-  position: absolute; /* float on top */
-  top: 15px;
-  left: 20px;
-  right: 20px; /* allow navbar to stretch full width */
+  position: relative; /* change from absolute */
+  width: 100%; /* full width black header */
   display: flex;
   justify-content: space-between; /* push logo left & links right */
   align-items: center;
-  padding: 0 20px; /* add horizontal spacing */
+  padding: 10px 20px;
+  margin-bottom: 30px; /* gap between header and body */
 }
 
 /* Make sure logo and nav links align properly */
@@ -173,18 +172,18 @@ body {
   padding: 18px 40px;
   font-size: 20px;
   font-weight: bold;
-  border-radius: 12px;
-  border: 2px solid #4facfe;
+  border-radius: 20px; /* smoother rounded button */
+  border: 2px solid #011621;
   cursor: pointer;
-  background: #ffffff; /* Default background */
-  color: #4facfe; /* Default text color */
+  background: #ffffff;
+  color: #4facfe;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease; /* Smooth transition */
+  transition: all 0.3s ease;
 }
 
 .hero button:hover {
-  background: #4facfe; /* Hover background */
-  color: #ffffff; /* Hover text color */
+  background: #4facfe;
+  color: #ffffff;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
