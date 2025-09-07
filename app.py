@@ -19,13 +19,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+
 # ------------------ Database Models ------------------
 class User(db.Model):
-    __tablename__ = "users"   # ✅ PostgreSQL safe table name
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150))
     email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(200))
+    password = db.Column(db.String(200), nullable=True) # 🔑 Add this line to make the password column nullable
     picture = db.Column(db.String(300))
 
 
