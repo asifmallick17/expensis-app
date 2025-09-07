@@ -201,6 +201,11 @@ footer {
 @media (max-width: 768px) {
   .hamburger {
     display: block;
+    margin-right: 10px; /* move slightly left from edge */
+  }
+
+  .navbar {
+    padding: 10px 15px; /* adjust padding so ☰ doesn’t go outside */
   }
 
   #nav-links {
