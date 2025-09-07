@@ -90,6 +90,14 @@ body {
   font-size: 28px;
   cursor: pointer;
   color: #fafafa;
+  outline: none;           /* remove blue outline */
+  border: none;            /* no border */
+  background: transparent; /* shows body's background */
+}
+
+.hamburger:focus {
+  outline: none;           /* prevent thick line */
+  background: transparent; /* keep body gradient visible */
 }
 
 /* Dropdown */
