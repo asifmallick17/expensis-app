@@ -13,21 +13,31 @@ body {
 
 /* Navbar / Logo positioning */
 .navbar {
-  position: absolute;   /* float on top */
+  background-color: black;
+  position: absolute; /* float on top */
   top: 15px;
   left: 20px;
+  right: 20px; /* allow navbar to stretch full width */
+  display: flex;
+  justify-content: space-between; /* push logo left & links right */
+  align-items: center;
+  padding: 0 20px; /* add horizontal spacing */
+}
+
+/* Make sure logo and nav links align properly */
+.logo {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .logo img {
-  height: 120px;  /* adjust logo size */
+  height: 120px; /* adjust logo size */
 }
 
 .logo span {
-  color: #00bfff;  /* sky blue text */
-  font-size: 20px;
+  color: #00bfff; /* sky blue text */
+  font-size: 22px;
   font-weight: bold;
   letter-spacing: 2px;
   position: absolute;
@@ -40,6 +50,7 @@ body {
   display: flex;
   gap: 20px;
   align-items: center;
+  margin-left: auto; /* ensures links are pushed right */
 }
 
 #nav-links a {
@@ -165,15 +176,15 @@ body {
   border-radius: 12px;
   border: 2px solid #4facfe;
   cursor: pointer;
-  background: #ffffff;   /* Default background */
-  color: #4facfe;        /* Default text color */
+  background: #ffffff; /* Default background */
+  color: #4facfe; /* Default text color */
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;  /* Smooth transition */
+  transition: all 0.3s ease; /* Smooth transition */
 }
 
 .hero button:hover {
-  background: #4facfe;  /* Hover background */
-  color: #ffffff;       /* Hover text color */
+  background: #4facfe; /* Hover background */
+  color: #ffffff; /* Hover text color */
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
