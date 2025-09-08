@@ -147,6 +147,8 @@ def show_expense():
     return render_template("show_expense.html")
 
 
+from sqlalchemy import text
+
 @app.route("/total_expenses")
 def total_expense():
     if "user" not in session:
@@ -157,28 +159,30 @@ def total_expense():
     time_period = request.args.get('time_period', 'day')
 
     if time_period == 'month':
-        query = db.session.execute("""
-            SELECT TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') as time_group, category, SUM(amount) as total_amount 
-            FROM expense 
-            WHERE user_email = :email 
-            GROUP BY time_group, category 
+        query = db.session.execute(text("""
+            SELECT TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') as time_group, category, SUM(amount) as total_amount
+            FROM expense
+            WHERE user_email = :email
+            GROUP BY time_group, category
             ORDER BY time_group DESC
-        """, {"email": user_email})
+        """), {"email": user_email})
+
     elif time_period == 'year':
-        query = db.session.execute("""
-            SELECT EXTRACT(YEAR FROM date)::int as time_group, category, SUM(amount) as total_amount 
-            FROM expense 
-            WHERE user_email = :email 
-            GROUP BY time_group, category 
+        query = db.session.execute(text("""
+            SELECT EXTRACT(YEAR FROM date)::int as time_group, category, SUM(amount) as total_amount
+            FROM expense
+            WHERE user_email = :email
+            GROUP BY time_group, category
             ORDER BY time_group DESC
-        """, {"email": user_email})
-    else:
-        query = db.session.execute("""
-            SELECT date, category, description, amount 
-            FROM expense 
-            WHERE user_email = :email 
+        """), {"email": user_email})
+
+    else:  # default 'day'
+        query = db.session.execute(text("""
+            SELECT date, category, description, amount
+            FROM expense
+            WHERE user_email = :email
             ORDER BY date DESC
-        """, {"email": user_email})
+        """), {"email": user_email})
 
     expenses = query.fetchall()
     total = db.session.query(db.func.sum(Expense.amount)).filter_by(user_email=user_email).scalar() or 0
