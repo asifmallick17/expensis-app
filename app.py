@@ -4,16 +4,13 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
+from datetime import datetime
 
 load_dotenv()
-
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback_secret')
-
-# PostgreSQL connection (Render provides DATABASE_URL)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -26,14 +23,15 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150))
     email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=True) # 🔑 Add this line to make the password column nullable
+    password = db.Column(db.String(200), nullable=True)
     picture = db.Column(db.String(300))
 
 
 class Expense(db.Model):
+    __tablename__ = "expense"
     id = db.Column(db.Integer, primary_key=True)
-    user_email = db.Column(db.String(120), db.ForeignKey("users.email"), nullable=False)  # updated here
-    date = db.Column(db.String(50))
+    user_email = db.Column(db.String(120), db.ForeignKey("users.email"), nullable=False)
+    date = db.Column(db.Date, nullable=False)
     category = db.Column(db.String(100))
     description = db.Column(db.String(300))
     amount = db.Column(db.Float)
@@ -41,33 +39,31 @@ class Expense(db.Model):
 
 @app.route("/initdb")
 def initdb():
-    from your_app_file import db   # replace with the right import if needed
     db.create_all()
     return "Database initialized!"
-
 
 
 # ------------------ Google OAuth ------------------
 google_bp = make_google_blueprint(
     client_id=os.getenv("GOOGLE_CLIENT_ID"),
     client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
-    scope=[
-        "openid",
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/userinfo.email"
-    ],
+    scope=["openid", "https://www.googleapis.com/auth/userinfo.profile",
+           "https://www.googleapis.com/auth/userinfo.email"],
     redirect_to="google_login"
 )
 app.register_blueprint(google_bp, url_prefix="/login")
+
 
 # ------------------ Routes ------------------
 @app.route("/")
 def home():
     return render_template("home.html")
 
+
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
@@ -75,6 +71,7 @@ def contact():
         flash("Your message has been sent successfully!", "success")
         return redirect("/contact")
     return render_template("contact.html")
+
 
 @app.route("/signin", methods=['GET', 'POST'])
 def signin():
@@ -92,6 +89,7 @@ def signin():
             return redirect(url_for("signin"))
 
     return render_template("signin.html")
+
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -113,21 +111,24 @@ def signup():
             return redirect(url_for('signup'))
     return render_template("signup.html")
 
+
 @app.route("/add_expense", methods=['GET', 'POST'])
 def add_expense():
     if "user" not in session:
         flash("Please sign in!", "warning")
         return redirect('/signin')
-    
+
     if request.method == "POST":
-        date = request.form["date"]
+        date_str = request.form["date"]
+        date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
+
         category = request.form["category"]
         description = request.form["description"]
         amount = float(request.form["amount"])
 
         expense = Expense(
             user_email=session["user"]["email"],
-            date=date,
+            date=date_obj,
             category=category,
             description=description,
             amount=amount
@@ -137,7 +138,9 @@ def add_expense():
 
         flash("Expense added successfully!", "success")
         return redirect(url_for("add_expense"))
+
     return render_template("add_expense.html")
+
 
 @app.route("/show_expense")
 def show_expense():
@@ -153,29 +156,133 @@ def total_expense():
     user_email = session["user"]["email"]
     time_period = request.args.get('time_period', 'day')
 
-    query = None
     if time_period == 'month':
         query = db.session.execute("""
-            SELECT TO_CHAR(TO_DATE(date, 'YYYY-MM-DD'), 'YYYY-MM') as time_group, category, SUM(amount) as total_amount 
-            FROM expense WHERE user_email = :email 
-            GROUP BY time_group, category ORDER BY time_group DESC
+            SELECT TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') as time_group, category, SUM(amount) as total_amount 
+            FROM expense 
+            WHERE user_email = :email 
+            GROUP BY time_group, category 
+            ORDER BY time_group DESC
         """, {"email": user_email})
     elif time_period == 'year':
         query = db.session.execute("""
-            SELECT TO_CHAR(TO_DATE(date, 'YYYY-MM-DD'), 'YYYY') as time_group, category, SUM(amount) as total_amount 
-            FROM expense WHERE user_email = :email 
-            GROUP BY time_group, category ORDER BY time_group DESC
+            SELECT EXTRACT(YEAR FROM date)::int as time_group, category, SUM(amount) as total_amount 
+            FROM expense 
+            WHERE user_email = :email 
+            GROUP BY time_group, category 
+            ORDER BY time_group DESC
         """, {"email": user_email})
     else:
         query = db.session.execute("""
             SELECT date, category, description, amount 
-            FROM expense WHERE user_email = :email ORDER BY date DESC
+            FROM expense 
+            WHERE user_email = :email 
+            ORDER BY date DESC
         """, {"email": user_email})
 
     expenses = query.fetchall()
     total = db.session.query(db.func.sum(Expense.amount)).filter_by(user_email=user_email).scalar() or 0
 
     return render_template("total_expenses.html", expenses=expenses, total=total, time_period=time_period)
+
+
+@app.route("/view_analysis")
+def view_analysis():
+    return render_template("view_analysis.html")
+
+
+@app.route("/api/analysis_data")
+def analysis_data():
+    if "user" not in session:
+        return jsonify({"error": "User not authenticated"}), 401
+
+    user_email = session["user"]["email"]
+    time_period = request.args.get("time_period", "day")
+
+    if time_period == "day":
+        results = db.session.execute("""
+            SELECT date, SUM(amount) as total_amount
+            FROM expense 
+            WHERE user_email = :email
+              AND date BETWEEN CURRENT_DATE - INTERVAL '7 days' AND CURRENT_DATE
+            GROUP BY date
+            ORDER BY date ASC
+        """, {"email": user_email}).fetchall()
+
+        category_results = db.session.execute("""
+            SELECT category, SUM(amount) as total_amount
+            FROM expense 
+            WHERE user_email = :email
+              AND date BETWEEN CURRENT_DATE - INTERVAL '7 days' AND CURRENT_DATE
+            GROUP BY category
+            ORDER BY total_amount DESC
+        """, {"email": user_email}).fetchall()
+
+    elif time_period == "week":
+        results = db.session.execute("""
+            SELECT TO_CHAR(DATE_TRUNC('week', date), 'IYYY-IW') as time_group, SUM(amount)
+            FROM expense
+            WHERE user_email = :email
+              AND date >= CURRENT_DATE - INTERVAL '2 months'
+            GROUP BY time_group
+            ORDER BY time_group ASC
+        """, {"email": user_email}).fetchall()
+
+        category_results = db.session.execute("""
+            SELECT category, SUM(amount)
+            FROM expense
+            WHERE user_email = :email
+              AND date >= CURRENT_DATE - INTERVAL '2 months'
+            GROUP BY category
+            ORDER BY SUM(amount) DESC
+        """, {"email": user_email}).fetchall()
+
+    elif time_period == "month":
+        results = db.session.execute("""
+            SELECT TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') as time_group, SUM(amount)
+            FROM expense
+            WHERE user_email = :email
+              AND date >= CURRENT_DATE - INTERVAL '1 year'
+            GROUP BY time_group
+            ORDER BY time_group ASC
+        """, {"email": user_email}).fetchall()
+
+        category_results = db.session.execute("""
+            SELECT category, SUM(amount)
+            FROM expense
+            WHERE user_email = :email
+              AND date >= CURRENT_DATE - INTERVAL '1 year'
+            GROUP BY category
+            ORDER BY SUM(amount) DESC
+        """, {"email": user_email}).fetchall()
+
+    elif time_period == "year":
+        results = db.session.execute("""
+            SELECT EXTRACT(YEAR FROM date)::int as time_group, SUM(amount)
+            FROM expense
+            WHERE user_email = :email
+            GROUP BY time_group
+            ORDER BY time_group ASC
+        """, {"email": user_email}).fetchall()
+
+        category_results = db.session.execute("""
+            SELECT category, SUM(amount)
+            FROM expense
+            WHERE user_email = :email
+            GROUP BY category
+            ORDER BY SUM(amount) DESC
+        """, {"email": user_email}).fetchall()
+
+    line_labels = [r[0] for r in results]
+    line_data = [r[1] for r in results]
+    category_labels = [r[0] for r in category_results]
+    category_amounts = [r[1] for r in category_results]
+
+    return jsonify({
+        "line_chart": {"labels": line_labels, "amounts": line_data},
+        "category_charts": {"labels": category_labels, "amounts": category_amounts}
+    })
+
 
 # ------------------ Google Login Callback ------------------
 @app.route("/google_login")
@@ -198,22 +305,17 @@ def google_login():
         return redirect(url_for("signin"))
 
     try:
-        # Check if user already exists
         user = User.query.filter_by(email=email).first()
-
         if not user:
-            # Create new user
             user = User(name=name, email=email, picture=picture)
             db.session.add(user)
             db.session.commit()
-        
     except Exception as e:
-        db.session.rollback()  # important to prevent session errors
+        db.session.rollback()
         print("Error saving Google user:", e)
         flash("Login failed due to a database error. Try again.", "danger")
         return redirect(url_for("signin"))
 
-    # Set session
     session["user"] = {"name": name, "email": email, "picture": picture}
     flash("Signed in successfully via Google!", "success")
     return redirect(url_for("home"))
@@ -225,12 +327,14 @@ def profile():
         return redirect(url_for("signin"))
     return render_template("profile.html", user=session["user"])
 
+
 @app.route("/logout")
 def logout():
     session.pop("user", None)
     return redirect(url_for("home"))
 
+
 if __name__ == "__main__":
     with app.app_context():
-        db.create_all()  # Create tables if not exist
+        db.create_all()
     app.run(debug=True)
