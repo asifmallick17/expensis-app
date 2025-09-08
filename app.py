@@ -163,8 +163,8 @@ def total_expense():
             SELECT TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') as time_group, category, SUM(amount) as total_amount
             FROM expense
             WHERE user_email = :email
-            GROUP BY time_group, category
-            ORDER BY time_group DESC
+            GROUP BY TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM'), category
+            ORDER BY TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') DESC
         """), {"email": user_email})
 
     elif time_period == 'year':
@@ -172,11 +172,11 @@ def total_expense():
             SELECT EXTRACT(YEAR FROM date)::int as time_group, category, SUM(amount) as total_amount
             FROM expense
             WHERE user_email = :email
-            GROUP BY time_group, category
-            ORDER BY time_group DESC
+            GROUP BY EXTRACT(YEAR FROM date)::int, category
+            ORDER BY EXTRACT(YEAR FROM date)::int DESC
         """), {"email": user_email})
 
-    else:  # default 'day'
+    else:  # day
         query = db.session.execute(text("""
             SELECT date, category, description, amount
             FROM expense
@@ -206,6 +206,7 @@ def analysis_data():
     time_period = request.args.get("time_period", "day")
 
     if time_period == "day":
+        # Last 7 days
         results = db.session.execute(text("""
             SELECT date, SUM(amount) as total_amount
             FROM expense 
@@ -225,17 +226,18 @@ def analysis_data():
         """), {"email": user_email}).fetchall()
 
     elif time_period == "week":
+        # Last 2 months, weekly grouping
         results = db.session.execute(text("""
-            SELECT TO_CHAR(DATE_TRUNC('week', date), 'IYYY-IW') as time_group, SUM(amount)
+            SELECT TO_CHAR(DATE_TRUNC('week', date), 'IYYY-IW') as time_group, SUM(amount) as total_amount
             FROM expense
             WHERE user_email = :email
               AND date >= CURRENT_DATE - INTERVAL '2 months'
-            GROUP BY time_group
-            ORDER BY time_group ASC
+            GROUP BY DATE_TRUNC('week', date)
+            ORDER BY DATE_TRUNC('week', date) ASC
         """), {"email": user_email}).fetchall()
 
         category_results = db.session.execute(text("""
-            SELECT category, SUM(amount)
+            SELECT category, SUM(amount) as total_amount
             FROM expense
             WHERE user_email = :email
               AND date >= CURRENT_DATE - INTERVAL '2 months'
@@ -244,17 +246,18 @@ def analysis_data():
         """), {"email": user_email}).fetchall()
 
     elif time_period == "month":
+        # Last 12 months, monthly grouping
         results = db.session.execute(text("""
-            SELECT TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') as time_group, SUM(amount)
+            SELECT TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') as time_group, SUM(amount) as total_amount
             FROM expense
             WHERE user_email = :email
               AND date >= CURRENT_DATE - INTERVAL '1 year'
-            GROUP BY time_group
-            ORDER BY time_group ASC
+            GROUP BY DATE_TRUNC('month', date)
+            ORDER BY DATE_TRUNC('month', date) ASC
         """), {"email": user_email}).fetchall()
 
         category_results = db.session.execute(text("""
-            SELECT category, SUM(amount)
+            SELECT category, SUM(amount) as total_amount
             FROM expense
             WHERE user_email = :email
               AND date >= CURRENT_DATE - INTERVAL '1 year'
@@ -263,26 +266,28 @@ def analysis_data():
         """), {"email": user_email}).fetchall()
 
     elif time_period == "year":
+        # All years, yearly grouping
         results = db.session.execute(text("""
-            SELECT EXTRACT(YEAR FROM date)::int as time_group, SUM(amount)
+            SELECT EXTRACT(YEAR FROM date)::int as time_group, SUM(amount) as total_amount
             FROM expense
             WHERE user_email = :email
-            GROUP BY time_group
-            ORDER BY time_group ASC
+            GROUP BY EXTRACT(YEAR FROM date)
+            ORDER BY EXTRACT(YEAR FROM date) ASC
         """), {"email": user_email}).fetchall()
 
         category_results = db.session.execute(text("""
-            SELECT category, SUM(amount)
+            SELECT category, SUM(amount) as total_amount
             FROM expense
             WHERE user_email = :email
             GROUP BY category
             ORDER BY SUM(amount) DESC
         """), {"email": user_email}).fetchall()
 
-    line_labels = [r[0] for r in results]
-    line_data = [r[1] for r in results]
+    # Prepare data for Chart.js
+    line_labels = [str(r[0]) for r in results]
+    line_data = [float(r[1]) for r in results]
     category_labels = [r[0] for r in category_results]
-    category_amounts = [r[1] for r in category_results]
+    category_amounts = [float(r[1]) for r in category_results]
 
     return jsonify({
         "line_chart": {"labels": line_labels, "amounts": line_data},

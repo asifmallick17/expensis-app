@@ -1,4 +1,4 @@
-let lineChart, barChart, pieChart, doughnutChart;
+let lineChart, barChart, pieChart;
 
 document.addEventListener("DOMContentLoaded", function () {
   const timePeriodSelect = document.getElementById("time-period");
@@ -34,9 +34,8 @@ function updateCharts(data) {
   if (lineChart) lineChart.destroy();
   if (barChart) barChart.destroy();
   if (pieChart) pieChart.destroy();
-  if (doughnutChart) doughnutChart.destroy();
 
-  // Check for empty data
+  // Handle empty data
   const lineLabels = line_chart.labels.length ? line_chart.labels : ["No Data"];
   const lineData = line_chart.amounts.length ? line_chart.amounts : [0];
   const categoryLabels = category_charts.labels.length
@@ -121,21 +120,4 @@ function updateCharts(data) {
       ],
     },
   });
-
-  // Doughnut Chart (only if canvas exists)
-  const doughnutCanvas = document.getElementById("doughnutChart");
-  if (doughnutCanvas) {
-    doughnutChart = new Chart(doughnutCanvas, {
-      type: "doughnut",
-      data: {
-        labels: categoryLabels,
-        datasets: [
-          {
-            data: categoryData,
-            backgroundColor: ["#64ffda", "#00bcd4", "#00838f", "#4dd0e1"],
-          },
-        ],
-      },
-    });
-  }
 }
