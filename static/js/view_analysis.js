@@ -18,11 +18,12 @@ async function fetchAndRenderCharts() {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
+
     const data = await response.json();
     updateCharts(data);
   } catch (error) {
     console.error("Error fetching data:", error);
-    // You can handle the error more gracefully here, e.g., show an error message on the page
+    alert("Failed to load expense data. Please try again.");
   }
 }
 
@@ -35,15 +36,25 @@ function updateCharts(data) {
   if (pieChart) pieChart.destroy();
   if (doughnutChart) doughnutChart.destroy();
 
+  // Check for empty data
+  const lineLabels = line_chart.labels.length ? line_chart.labels : ["No Data"];
+  const lineData = line_chart.amounts.length ? line_chart.amounts : [0];
+  const categoryLabels = category_charts.labels.length
+    ? category_charts.labels
+    : ["No Data"];
+  const categoryData = category_charts.amounts.length
+    ? category_charts.amounts
+    : [0];
+
   // Line Chart
   lineChart = new Chart(document.getElementById("lineChart"), {
     type: "line",
     data: {
-      labels: line_chart.labels,
+      labels: lineLabels,
       datasets: [
         {
           label: "Total Expenses ($)",
-          data: line_chart.amounts,
+          data: lineData,
           borderColor: "#64ffda",
           backgroundColor: "rgba(100, 255, 218, 0.15)",
           fill: true,
@@ -80,11 +91,11 @@ function updateCharts(data) {
   barChart = new Chart(document.getElementById("barChart"), {
     type: "bar",
     data: {
-      labels: category_charts.labels,
+      labels: categoryLabels,
       datasets: [
         {
           label: "Category-wise Expenses ($)",
-          data: category_charts.amounts,
+          data: categoryData,
           backgroundColor: [
             "#64ffda",
             "#00bcd4",
@@ -101,27 +112,30 @@ function updateCharts(data) {
   pieChart = new Chart(document.getElementById("pieChart"), {
     type: "pie",
     data: {
-      labels: category_charts.labels,
+      labels: categoryLabels,
       datasets: [
         {
-          data: category_charts.amounts,
+          data: categoryData,
           backgroundColor: ["#64ffda", "#00acc1", "#00838f", "#4dd0e1"],
         },
       ],
     },
   });
 
-  // Doughnut Chart
-  doughnutChart = new Chart(document.getElementById("doughnutChart"), {
-    type: "doughnut",
-    data: {
-      labels: category_charts.labels,
-      datasets: [
-        {
-          data: category_charts.amounts,
-          backgroundColor: ["#64ffda", "#00bcd4", "#00838f", "#4dd0e1"],
-        },
-      ],
-    },
-  });
+  // Doughnut Chart (only if canvas exists)
+  const doughnutCanvas = document.getElementById("doughnutChart");
+  if (doughnutCanvas) {
+    doughnutChart = new Chart(doughnutCanvas, {
+      type: "doughnut",
+      data: {
+        labels: categoryLabels,
+        datasets: [
+          {
+            data: categoryData,
+            backgroundColor: ["#64ffda", "#00bcd4", "#00838f", "#4dd0e1"],
+          },
+        ],
+      },
+    });
+  }
 }

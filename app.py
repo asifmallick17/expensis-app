@@ -195,6 +195,8 @@ def view_analysis():
     return render_template("view_analysis.html")
 
 
+from sqlalchemy import text
+
 @app.route("/api/analysis_data")
 def analysis_data():
     if "user" not in session:
@@ -204,78 +206,78 @@ def analysis_data():
     time_period = request.args.get("time_period", "day")
 
     if time_period == "day":
-        results = db.session.execute("""
+        results = db.session.execute(text("""
             SELECT date, SUM(amount) as total_amount
             FROM expense 
             WHERE user_email = :email
               AND date BETWEEN CURRENT_DATE - INTERVAL '7 days' AND CURRENT_DATE
             GROUP BY date
             ORDER BY date ASC
-        """, {"email": user_email}).fetchall()
+        """), {"email": user_email}).fetchall()
 
-        category_results = db.session.execute("""
+        category_results = db.session.execute(text("""
             SELECT category, SUM(amount) as total_amount
             FROM expense 
             WHERE user_email = :email
               AND date BETWEEN CURRENT_DATE - INTERVAL '7 days' AND CURRENT_DATE
             GROUP BY category
             ORDER BY total_amount DESC
-        """, {"email": user_email}).fetchall()
+        """), {"email": user_email}).fetchall()
 
     elif time_period == "week":
-        results = db.session.execute("""
+        results = db.session.execute(text("""
             SELECT TO_CHAR(DATE_TRUNC('week', date), 'IYYY-IW') as time_group, SUM(amount)
             FROM expense
             WHERE user_email = :email
               AND date >= CURRENT_DATE - INTERVAL '2 months'
             GROUP BY time_group
             ORDER BY time_group ASC
-        """, {"email": user_email}).fetchall()
+        """), {"email": user_email}).fetchall()
 
-        category_results = db.session.execute("""
+        category_results = db.session.execute(text("""
             SELECT category, SUM(amount)
             FROM expense
             WHERE user_email = :email
               AND date >= CURRENT_DATE - INTERVAL '2 months'
             GROUP BY category
             ORDER BY SUM(amount) DESC
-        """, {"email": user_email}).fetchall()
+        """), {"email": user_email}).fetchall()
 
     elif time_period == "month":
-        results = db.session.execute("""
+        results = db.session.execute(text("""
             SELECT TO_CHAR(DATE_TRUNC('month', date), 'YYYY-MM') as time_group, SUM(amount)
             FROM expense
             WHERE user_email = :email
               AND date >= CURRENT_DATE - INTERVAL '1 year'
             GROUP BY time_group
             ORDER BY time_group ASC
-        """, {"email": user_email}).fetchall()
+        """), {"email": user_email}).fetchall()
 
-        category_results = db.session.execute("""
+        category_results = db.session.execute(text("""
             SELECT category, SUM(amount)
             FROM expense
             WHERE user_email = :email
               AND date >= CURRENT_DATE - INTERVAL '1 year'
             GROUP BY category
             ORDER BY SUM(amount) DESC
-        """, {"email": user_email}).fetchall()
+        """), {"email": user_email}).fetchall()
 
     elif time_period == "year":
-        results = db.session.execute("""
+        results = db.session.execute(text("""
             SELECT EXTRACT(YEAR FROM date)::int as time_group, SUM(amount)
             FROM expense
             WHERE user_email = :email
             GROUP BY time_group
             ORDER BY time_group ASC
-        """, {"email": user_email}).fetchall()
+        """), {"email": user_email}).fetchall()
 
-        category_results = db.session.execute("""
+        category_results = db.session.execute(text("""
             SELECT category, SUM(amount)
             FROM expense
             WHERE user_email = :email
             GROUP BY category
             ORDER BY SUM(amount) DESC
-        """, {"email": user_email}).fetchall()
+        """), {"email": user_email}).fetchall()
 
     line_labels = [r[0] for r in results]
     line_data = [r[1] for r in results]

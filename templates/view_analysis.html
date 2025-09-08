@@ -26,27 +26,25 @@
   </header>
 
   <!-- Flash Message -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 
-
-<script>
-setTimeout(() => {
-    document.querySelectorAll('.alert').forEach(alert => {
-      alert.style.transition = "opacity 0.5s ease";
-      alert.style.opacity = "0";
-      setTimeout(() => alert.remove(), 500); // removes after fade-out
-    });
-  }, 3000); // 3 seconds
-</script>
-
+  <script>
+    setTimeout(() => {
+      document.querySelectorAll('.alert').forEach(alert => {
+        alert.style.transition = "opacity 0.5s ease";
+        alert.style.opacity = "0";
+        setTimeout(() => alert.remove(), 500);
+      });
+    }, 3000);
+  </script>
 
   <div class="container">
     <h2>Your Expense Insights</h2>
@@ -71,7 +69,9 @@ setTimeout(() => {
       <div class="chart-card">
         <canvas id="pieChart"></canvas>
       </div>
-     
+      <div class="chart-card">
+        <canvas id="doughnutChart"></canvas>
+      </div>
     </div>
   </div>
 
